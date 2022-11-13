@@ -21,7 +21,7 @@ def borrar_char(df,campo):
 def clean_data():
     
 
-    df = pd.read_csv("solicitudes_credito.csv", sep=";", encoding='utf8')
+    df = pd.read_csv("solicitudes_credito.csv", sep=";", index_col = 0)
     
     # Tenga en cuenta datos faltantes
     df.dropna(axis = 0, inplace = True)
@@ -41,7 +41,8 @@ def clean_data():
     df['monto_del_credito'] = df['monto_del_credito'].astype(int)
     df['comuna_ciudadano'] = df['comuna_ciudadano'].astype(float)
     df['fecha_de_beneficio'] = df['fecha_de_beneficio'].apply(lambda x: dt.datetime.strptime(x, "%d/%m/%Y") if (x[-5] == '/' and x[-8] == '/') else dt.datetime.strptime(x, "%Y/%m/%d"))
-    
+
+
     # Tenga en cuenta duplicados
     df.drop_duplicates(inplace = True)
     return df
